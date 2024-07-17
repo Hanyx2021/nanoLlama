@@ -1,4 +1,11 @@
 
+# llama
+
+训练llama的transformer:
+```
+python3 train.py config/train_llama.py
+```
+
 # nanoGPT
 
 ![nanoGPT](assets/nanogpt.jpg)
