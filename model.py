@@ -226,13 +226,14 @@ class Transformer(nn.Module):
         for layer in self.layers:
             h = layer(h, start_pos, freqs_cis, mask)
         h = self.norm(h)
-        output = self.output(h[:, -1, :])
+
         if targets is not None:
             logits = self.output(h)
             loss = jt.nn.cross_entropy_loss(logits.view(-1, logits.size(-1)), targets.view(-1), ignore_index=-1)
         else:
+            logits = self.output(h[:, [-1], :])
             loss = None
-        return output.float(),loss
+        return logits, loss
 
     def configure_optimizers(self, weight_decay, learning_rate, betas):
         # start with all of the candidate parameters
@@ -259,3 +260,19 @@ class Transformer(nn.Module):
         print(f"using fused AdamW: {use_fused}")
 
         return optimizer
+
+if __name__ == "__main__":
+    jt.flags.use_acl = 1
+    model_args = dict(dim = 512,n_layers = 10,n_heads = 4,vocab_size = 50304,multiple_of = 8,norm_eps = 1e-6,
+                  max_batch_size = 100,max_seq_len = 256) # start with model_args from command line
+    model = Transformer(ModelArgs(**model_args))
+    print(model)
+    model.train()
+    tokens = jt.ones(2, 512)
+    targets = jt.ones(2, 512)
+    for i in range(10):
+        logits, loss = model(tokens, 0, targets)
+        optimizer = model.configure_optimizers(0.1, 3e-4, (0.9, 0.95))
+        optimizer.step(loss)
+        print(model.state_dict()['layers.0.attention_norm.weight'])
+        print("done")
