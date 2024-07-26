@@ -119,6 +119,7 @@ if init_from == 'scratch':
         print("defaulting to vocab_size of GPT-2 to 50304 (50257 rounded up for efficiency)")
     model_args['vocab_size'] = meta_vocab_size if meta_vocab_size is not None else 50304
     model_conf = ModelArgs(**model_args)
+    print('model_conf =', model_conf)
     model = Transformer(model_conf)
 elif init_from == 'resume':
     print(f"Resuming training from {out_dir}")
