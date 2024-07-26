@@ -90,6 +90,11 @@ def get_batch(split):
     y = jt.stack([jt.array((data[i+1:i+1+block_size]).astype(np.int64)) for i in ix])
     return x, y
 
+# def get_batch(split):
+#     x = jt.ones((64, 256), dtype='int')
+#     y = jt.zeros((64, 256), dtype='int')
+#     return x, y
+
 # init these up here, can override if init_from='resume' (i.e. from a checkpoint)
 iter_num = 0
 best_val_loss = 1e9
@@ -113,8 +118,39 @@ if init_from == 'scratch':
     if meta_vocab_size is None:
         print("defaulting to vocab_size of GPT-2 to 50304 (50257 rounded up for efficiency)")
     model_args['vocab_size'] = meta_vocab_size if meta_vocab_size is not None else 50304
-    gptconf = ModelArgs(**model_args)
-    model = Transformer(gptconf)
+    model_conf = ModelArgs(**model_args)
+    model = Transformer(model_conf)
+elif init_from == 'resume':
+    print(f"Resuming training from {out_dir}")
+    # resume training from a checkpoint.
+    ckpt_path = os.path.join(out_dir, 'ckpt.pth')
+    checkpoint = jt.load(ckpt_path)
+    checkpoint_model_args = checkpoint['model_args']
+    # force these config attributes to be equal otherwise we can't even resume training
+    # the rest of the attributes (e.g. dropout) can stay as desired from command line
+    for k in ['n_layers', 'n_heads', 'dim', 'max_seq_len', 'vocab_size']:
+        model_args[k] = checkpoint_model_args[k]
+    # create the model
+    model_conf = ModelArgs(**model_args)
+    model = Transformer(model_conf)
+    state_dict = checkpoint['model']
+    # fix the keys of the state dictionary :(
+    # honestly no idea how checkpoints sometimes get this prefix, have to debug more
+    unwanted_prefix = '_orig_mod.'
+    for k,v in list(state_dict.items()):
+        if k.startswith(unwanted_prefix):
+            state_dict[k[len(unwanted_prefix):]] = state_dict.pop(k)
+    model.load_state_dict(state_dict)
+    iter_num = checkpoint['iter_num']
+    best_val_loss = checkpoint['best_val_loss']
+# elif init_from.startswith('gpt2'):
+#     print(f"Initializing from OpenAI GPT-2 weights: {init_from}")
+#     # initialize from OpenAI GPT-2 weights
+#     override_args = dict(dropout=dropout)
+#     model = GPT.from_pretrained(init_from, override_args)
+#     # read off the created config params, so we can store them into checkpoint correctly
+#     for k in ['n_layer', 'n_head', 'n_embd', 'block_size', 'bias', 'vocab_size']:
+#         model_args[k] = getattr(model.config, k)
 
 # optimizer
 optimizer = model.configure_optimizers(weight_decay, learning_rate, (beta1, beta2))
@@ -131,6 +167,7 @@ with jt.no_grad():
                 X, Y = get_batch(split)
                 with ctx:
                     logits, loss = model(X,0,Y)
+                    jt.sync_all(True)
                 losses[k] = loss.item()
             out[split] = losses.mean()
         model.train()
@@ -190,6 +227,7 @@ while True:
             logits, loss = model(X, 0, Y)
             loss = loss / gradient_accumulation_steps
         X, Y = get_batch('train')
+        jt.sync_all(True)
         optimizer.backward(loss)
     if grad_clip != 0.0:
         optimizer.clip_grad_norm(grad_clip)
@@ -200,11 +238,12 @@ while True:
     t1 = time.time()
     dt = t1 - t0
     t0 = t1
-    if iter_num % log_interval == 0 and master_process:
+    if True:
+    # if iter_num % log_interval == 0 and master_process:
         # get loss as float. note: this is a CPU-GPU sync point
         # scale up to undo the division above, approximating the true total loss (exact would have been a sum)
         lossf = loss.item() * gradient_accumulation_steps
-        print(f"iter {iter_num}: loss {lossf:.4f}, time {dt*1000:.2f}ms")
+        print(f"iter {iter_num}: loss {lossf:.8f}, time {dt*1000:.2f}ms")
     iter_num += 1
     local_iter_num += 1
 
