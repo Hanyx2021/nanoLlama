@@ -20,8 +20,8 @@ block_size = 256 # context of up to 256 previous characters
 
 # baby LLaMA model :)
 dim = 128
-n_layers = 3
-n_heads = 4
+n_layers = 8
+n_heads = 8
 dropout = 0.2
 
 learning_rate = 1e-3 # with baby networks can afford to go a bit higher
