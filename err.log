@@ -1,0 +1,231 @@
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+Overriding config with config/train_shakespeare_char.py:
+# train a miniature character-level shakespeare model
+# good for debugging and playing on macbooks and such
+
+out_dir = 'out-shakespeare-char'
+eval_interval = 250 # keep frequent because we'll overfit
+eval_iters = 200
+log_interval = 10 # don't print too too often
+
+# we expect to overfit on this small dataset, so only save when val improves
+always_save_checkpoint = False
+
+wandb_log = False # override via command line if you like
+wandb_project = 'shakespeare-char'
+wandb_run_name = 'mini-gpt'
+
+dataset = 'shakespeare_char'
+gradient_accumulation_steps = 1
+batch_size = 64
+block_size = 256 # context of up to 256 previous characters
+
+# baby GPT model :)
+n_layer = 6
+n_head = 6
+n_embd = 384
+dropout = 0.2
+
+learning_rate = 1e-3 # with baby networks can afford to go a bit higher
+max_iters = 5000
+lr_decay_iters = 5000 # make equal to max_iters usually
+min_lr = 1e-4 # learning_rate / 10 usually
+beta2 = 0.99 # make a bit bigger because number of tokens per iter is small
+
+warmup_iters = 100 # not super necessary potentially
+
+# on macbook also add
+# device = 'cpu'  # run on cpu only
+# compile = False # do not torch compile the model
+
+tokens per iteration will be: 16,384
+found vocab_size = 65 (inside data/shakespeare_char/meta.pkl)
+Initializing a new model from scratch
+model_conf = ModelArgs(dim=128, n_layers=8, n_heads=8, vocab_size=65, multiple_of=8, norm_eps=1e-06, max_batch_size=64, max_seq_len=256)
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/dsl/unify_schedule/extract_image_patches_without_cbuf_schedule.py:317: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if _ is not 1:
+num decayed parameter tensors: 58, with 1,597,696 parameters
+num non-decayed parameter tensors: 17, with 2,176 parameters
+using fused AdamW: False
+compiling the model... (takes a ~minute)
+[W LegacyTypeDispatch.h:74] Warning: AutoNonVariableTypeMode is deprecated and will be removed in 1.10 release. For kernel implementations please use AutoDispatchBelowADInplaceOrView instead, If you are looking for a user facing API to enable running your inference-only workload, please use c10::InferenceMode. Using AutoDispatchBelowADInplaceOrView in user code is under risk of producing silent wrong result in some edge cases. See Note [AutoDispatchBelowAutograd] for more details. (function operator())
+[2024-07-28 22:30:16,880] torch._dynamo.convert_frame: [WARNING] WON'T CONVERT forward /home/ma-user/work/JittorLLMs/nanoLLaMA/model.py line 551 
+[2024-07-28 22:30:16,880] torch._dynamo.convert_frame: [WARNING] due to: 
+[2024-07-28 22:30:16,880] torch._dynamo.convert_frame: [WARNING] Traceback (most recent call last):
+[2024-07-28 22:30:16,880] torch._dynamo.convert_frame: [WARNING]   File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/_inductor/graph.py", line 906, in init_wrapper_code
+[2024-07-28 22:30:16,880] torch._dynamo.convert_frame: [WARNING]     self.wrapper_code = wrapper_code_gen_cls()
+[2024-07-28 22:30:16,880] torch._dynamo.convert_frame: [WARNING] torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:
+[2024-07-28 22:30:16,880] torch._dynamo.convert_frame: [WARNING] TypeError: 'NoneType' object is not callable
+[2024-07-28 22:30:16,880] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:16,880] torch._dynamo.convert_frame: [WARNING] Set TORCH_LOGS="+dynamo" and TORCHDYNAMO_VERBOSE=1 for more information
+[2024-07-28 22:30:16,880] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:16,880] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:18,708] torch._dynamo.convert_frame: [WARNING] WON'T CONVERT forward /home/ma-user/work/JittorLLMs/nanoLLaMA/model.py line 514 
+[2024-07-28 22:30:18,708] torch._dynamo.convert_frame: [WARNING] due to: 
+[2024-07-28 22:30:18,708] torch._dynamo.convert_frame: [WARNING] Traceback (most recent call last):
+[2024-07-28 22:30:18,708] torch._dynamo.convert_frame: [WARNING]   File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/_inductor/graph.py", line 906, in init_wrapper_code
+[2024-07-28 22:30:18,708] torch._dynamo.convert_frame: [WARNING]     self.wrapper_code = wrapper_code_gen_cls()
+[2024-07-28 22:30:18,708] torch._dynamo.convert_frame: [WARNING] torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:
+[2024-07-28 22:30:18,708] torch._dynamo.convert_frame: [WARNING] TypeError: 'NoneType' object is not callable
+[2024-07-28 22:30:18,708] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:18,708] torch._dynamo.convert_frame: [WARNING] Set TORCH_LOGS="+dynamo" and TORCHDYNAMO_VERBOSE=1 for more information
+[2024-07-28 22:30:18,708] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:18,708] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:18,821] torch._dynamo.convert_frame: [WARNING] WON'T CONVERT forward /home/ma-user/work/JittorLLMs/nanoLLaMA/model.py line 354 
+[2024-07-28 22:30:18,821] torch._dynamo.convert_frame: [WARNING] due to: 
+[2024-07-28 22:30:18,821] torch._dynamo.convert_frame: [WARNING] Traceback (most recent call last):
+[2024-07-28 22:30:18,821] torch._dynamo.convert_frame: [WARNING]   File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/_inductor/graph.py", line 906, in init_wrapper_code
+[2024-07-28 22:30:18,821] torch._dynamo.convert_frame: [WARNING]     self.wrapper_code = wrapper_code_gen_cls()
+[2024-07-28 22:30:18,821] torch._dynamo.convert_frame: [WARNING] torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:
+[2024-07-28 22:30:18,821] torch._dynamo.convert_frame: [WARNING] TypeError: 'NoneType' object is not callable
+[2024-07-28 22:30:18,821] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:18,821] torch._dynamo.convert_frame: [WARNING] Set TORCH_LOGS="+dynamo" and TORCHDYNAMO_VERBOSE=1 for more information
+[2024-07-28 22:30:18,821] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:18,821] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:18,907] torch._dynamo.convert_frame: [WARNING] WON'T CONVERT _norm /home/ma-user/work/JittorLLMs/nanoLLaMA/model.py line 351 
+[2024-07-28 22:30:18,907] torch._dynamo.convert_frame: [WARNING] due to: 
+[2024-07-28 22:30:18,907] torch._dynamo.convert_frame: [WARNING] Traceback (most recent call last):
+[2024-07-28 22:30:18,907] torch._dynamo.convert_frame: [WARNING]   File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/_inductor/graph.py", line 906, in init_wrapper_code
+[2024-07-28 22:30:18,907] torch._dynamo.convert_frame: [WARNING]     self.wrapper_code = wrapper_code_gen_cls()
+[2024-07-28 22:30:18,907] torch._dynamo.convert_frame: [WARNING] torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:
+[2024-07-28 22:30:18,907] torch._dynamo.convert_frame: [WARNING] TypeError: 'NoneType' object is not callable
+[2024-07-28 22:30:18,907] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:18,907] torch._dynamo.convert_frame: [WARNING] Set TORCH_LOGS="+dynamo" and TORCHDYNAMO_VERBOSE=1 for more information
+[2024-07-28 22:30:18,907] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:18,907] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:20,269] torch._dynamo.convert_frame: [WARNING] WON'T CONVERT forward /home/ma-user/work/JittorLLMs/nanoLLaMA/model.py line 435 
+[2024-07-28 22:30:20,269] torch._dynamo.convert_frame: [WARNING] due to: 
+[2024-07-28 22:30:20,269] torch._dynamo.convert_frame: [WARNING] Traceback (most recent call last):
+[2024-07-28 22:30:20,269] torch._dynamo.convert_frame: [WARNING]   File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/_inductor/graph.py", line 906, in init_wrapper_code
+[2024-07-28 22:30:20,269] torch._dynamo.convert_frame: [WARNING]     self.wrapper_code = wrapper_code_gen_cls()
+[2024-07-28 22:30:20,269] torch._dynamo.convert_frame: [WARNING] torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:
+[2024-07-28 22:30:20,269] torch._dynamo.convert_frame: [WARNING] TypeError: 'NoneType' object is not callable
+[2024-07-28 22:30:20,269] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:20,269] torch._dynamo.convert_frame: [WARNING] Set TORCH_LOGS="+dynamo" and TORCHDYNAMO_VERBOSE=1 for more information
+[2024-07-28 22:30:20,269] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:20,269] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:20,851] torch._dynamo.convert_frame: [WARNING] WON'T CONVERT apply_rotary_emb /home/ma-user/work/JittorLLMs/nanoLLaMA/model.py line 374 
+[2024-07-28 22:30:20,851] torch._dynamo.convert_frame: [WARNING] due to: 
+[2024-07-28 22:30:20,851] torch._dynamo.convert_frame: [WARNING] Traceback (most recent call last):
+[2024-07-28 22:30:20,851] torch._dynamo.convert_frame: [WARNING]   File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/_inductor/graph.py", line 906, in init_wrapper_code
+[2024-07-28 22:30:20,851] torch._dynamo.convert_frame: [WARNING]     self.wrapper_code = wrapper_code_gen_cls()
+[2024-07-28 22:30:20,851] torch._dynamo.convert_frame: [WARNING] torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:
+[2024-07-28 22:30:20,851] torch._dynamo.convert_frame: [WARNING] TypeError: 'NoneType' object is not callable
+[2024-07-28 22:30:20,851] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:20,851] torch._dynamo.convert_frame: [WARNING] Set TORCH_LOGS="+dynamo" and TORCHDYNAMO_VERBOSE=1 for more information
+[2024-07-28 22:30:20,851] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:20,851] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:22,138] torch._dynamo.convert_frame: [WARNING] WON'T CONVERT forward /home/ma-user/work/JittorLLMs/nanoLLaMA/model.py line 494 
+[2024-07-28 22:30:22,138] torch._dynamo.convert_frame: [WARNING] due to: 
+[2024-07-28 22:30:22,138] torch._dynamo.convert_frame: [WARNING] Traceback (most recent call last):
+[2024-07-28 22:30:22,138] torch._dynamo.convert_frame: [WARNING]   File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/_inductor/graph.py", line 906, in init_wrapper_code
+[2024-07-28 22:30:22,138] torch._dynamo.convert_frame: [WARNING]     self.wrapper_code = wrapper_code_gen_cls()
+[2024-07-28 22:30:22,138] torch._dynamo.convert_frame: [WARNING] torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:
+[2024-07-28 22:30:22,138] torch._dynamo.convert_frame: [WARNING] TypeError: 'NoneType' object is not callable
+[2024-07-28 22:30:22,138] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:22,138] torch._dynamo.convert_frame: [WARNING] Set TORCH_LOGS="+dynamo" and TORCHDYNAMO_VERBOSE=1 for more information
+[2024-07-28 22:30:22,138] torch._dynamo.convert_frame: [WARNING] 
+[2024-07-28 22:30:22,138] torch._dynamo.convert_frame: [WARNING] 
+/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/autograd/__init__.py:251: UserWarning: Error detected in MatmulBackward0. Traceback of forward call that caused the error:
+  File "/home/ma-user/work/JittorLLMs/nanoLLaMA/train.py", line 315, in <module>
+    logits, loss = model(X, 0, Y)
+  File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py", line 328, in _fn
+    return fn(*args, **kwargs)
+  File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ma-user/work/JittorLLMs/nanoLLaMA/model.py", line 561, in forward
+    h = layer(h, start_pos, freqs_cis, mask)
+  File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ma-user/work/JittorLLMs/nanoLLaMA/model.py", line 521, in forward
+    h = x + self.attention(self.attention_norm(x), start_pos, freqs_cis, mask)
+  File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ma-user/work/JittorLLMs/nanoLLaMA/model.py", line 443, in forward
+    xq, xk, xv = self.wq(x), self.wk(x), self.wv(x)
+  File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+ (Triggered internally at /pytorch/torch/csrc/autograd/python_anomaly_mode.cpp:114.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+step 0: train loss 4.4697, val loss 4.4501
+gradient_accumulation_steps = 1
+iter 0: loss 4.4726, time 269809.90ms
+gradient_accumulation_steps = 1
+Traceback (most recent call last):
+  File "/home/ma-user/work/JittorLLMs/nanoLLaMA/train.py", line 320, in <module>
+    loss.backward(retain_graph=(micro_step == gradient_accumulation_steps - 1))
+  File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: one of the variables needed for gradient computation has been modified by an inplace operation: [npuFloatType [128, 128]],
+ which is output 0 of AsStridedBackward0, is at version 3; expected version 1 instead. 
+ Hint: the backtrace further above shows the operation that failed to compute its gradient.
+  The variable in question was changed in there or anywhere later. Good luck!
+terminate called after throwing an instance of 'c10::Error'
+  what():  invalid device pointer: 0x124041773a00
+Exception raised from free at /usr1/02/workspace/j_vqN6BFvg/pytorch/torch_npu/csrc/core/npu/NPUCachingAllocator.cpp:1311 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x68 (0xfffee79a2898 in /home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/lib/libc10.so)
+frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::string const&) + 0x6c (0xfffee795b2a8 in /home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/lib/libc10.so)
+frame #2: c10_npu::NPUCachingAllocator::raw_delete(void*) + 0x1c4 (0xfffda3861484 in /home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch_npu/lib/libtorch_npu.so)
+frame #3: torch_npu::NPUStorageImpl::~NPUStorageImpl() + 0x90 (0xfffda3857ef0 in /home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch_npu/lib/libtorch_npu.so)
+frame #4: c10::TensorImpl::~TensorImpl() + 0x14 (0xfffee79816e4 in /home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/lib/libc10.so)
+frame #5: <unknown function> + 0x397dd58 (0xfffeeb38bd58 in /home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/lib/libtorch_cpu.so)
+frame #6: torch::autograd::deleteNode(torch::autograd::Node*) + 0xac (0xfffeeb383a5c in /home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/lib/libtorch_cpu.so)
+frame #7: <unknown function> + 0x2fe4860 (0xfffeea9f2860 in /home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/lib/libtorch_cpu.so)
+frame #8: <unknown function> + 0xca58dc (0xfffee86b38dc in /home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/lib/libtorch_cpu.so)
+frame #9: <unknown function> + 0x3970ec0 (0xfffeeb37eec0 in /home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/lib/libtorch_cpu.so)
+frame #10: <unknown function> + 0xca58dc (0xfffee86b38dc in /home/ma-user/anaconda3/envs/nanoGPT/lib/python3.9/site-packages/torch/lib/libtorch_cpu.so)
+frame #11: <unknown function> + 0xb5550 (0xfffee77f1550 in /home/ma-user/anaconda3/envs/nanoGPT/bin/../lib/libstdc++.so.6)
+frame #12: <unknown function> + 0x37b20 (0xffff9dfb3b20 in /lib64/libc.so.6)
+frame #13: <unknown function> + 0x37c4c (0xffff9dfb3c4c in /lib64/libc.so.6)
+frame #14: __libc_start_main + 0xe0 (0xffff9df9cbf0 in /lib64/libc.so.6)
+<omitting python frames>
+
