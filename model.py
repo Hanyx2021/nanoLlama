@@ -245,7 +245,7 @@ class Transformer(nn.Module):
             logits = self.output(h)
             loss = jt.nn.cross_entropy_loss(logits.view(-1, logits.size(-1)), targets.view(-1), ignore_index=-1)
         else:
-            logits = self.output(h[:, [-1], :])
+            logits = self.output(h[:, -1, :])
             loss = None
         return logits, loss
 
@@ -274,6 +274,34 @@ class Transformer(nn.Module):
         print(f"using fused AdamW: {use_fused}")
 
         return optimizer
+
+    with jt.no_grad():
+        def generate(self, idx, max_new_tokens, temperature=1.0, top_k=None):
+            """
+            Take a conditioning sequence of indices idx (LongTensor of shape (b,t)) and complete
+            the sequence max_new_tokens times, feeding the predictions back into the model each time.
+            Most likely you'll want to make sure to be in model.eval() mode of operation for this.
+            """
+            for _ in range(max_new_tokens):
+                # if the sequence context is growing too long we must crop it at block_size
+                idx_cond = idx if idx.size(1) <= self.params.max_seq_len else idx[:, -self.params.max_seq_len:]
+                # forward the model to get the logits for the index in the sequence
+                logits, _ = self(idx_cond, 0)
+                # pluck the logits at the final step and scale by desired temperature
+                logits = logits / temperature
+                # optionally crop the logits to only the top k options
+                if top_k is not None:
+                    v, _ = jt.topk(logits, min(top_k, logits.size(-1)))
+                    logits[logits < v[:, -1].unsqueeze(-1)] = -float('Inf')
+                # apply softmax to convert logits to (normalized) probabilities
+                probs = nn.softmax(logits, dim=-1)
+                # sample from the distribution
+                idx_next = jt.multinomial(probs, num_samples=1)
+                # append sampled index to the running sequence and continue
+                idx = jt.concat((idx, idx_next), dim=1)
+
+            return idx
+
 
 if __name__ == "__main__":
     jt.flags.use_acl = 1

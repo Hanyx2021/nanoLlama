@@ -20,7 +20,7 @@ def plot_loss_curves(files):
     plt.figure(figsize=(10, 6))
     for file_path in files:
         iter_nums, loss_values = parse_loss_from_log(file_path)
-        N = 2000
+        N = 5000
         if file_path == 'nanoLlama-Pytorch-Nvidia.log':
             N //= 10
         plt.plot(iter_nums[:N], loss_values[:N], label='.'.join(file_path.split('.')[:-1]))
@@ -33,11 +33,14 @@ def plot_loss_curves(files):
 plot_loss_curves([
     ## ModelArgs(dim=128, n_layers=8, n_heads=8, vocab_size=65, multiple_of=8, norm_eps=1e-06, max_batch_size=64, max_seq_len=256)
     # 'nanoLlama-Pytorch-Nvidia.log',
-    'nanoLLaMA(35M)-Jittor1.3.9.10-Nvidia.log',
+    # 'nanoLLaMA(35M)-Jittor1.3.9.10-Nvidia.log',
     # # 'nanoLLaMA(35M)-Jittor1.3.9.10-Nvidia_2.log',  # 重复实验
-    'nanoLLaMA(35M)-Jittor1.3.9.10-Huawei.log',
-    'nanoLLaMA(35M)-Jittor1.3.9.10-Huawei_2.log',  # 重复实验
+    # 'nanoLLaMA(35M)-Jittor1.3.9.10-Huawei.log',
+    # 'nanoLLaMA(35M)-Jittor1.3.9.10-Huawei_2.log',  # 重复实验
 
+
+    ## ModelArgs(dim=128, n_layers=21, n_heads=12, vocab_size=65, multiple_of=8, norm_eps=1e-06, max_batch_size=64, max_seq_len=256)
+    'nanoLLaMA(50M)-Jittor1.3.9.10-Huawei.log',
 
     ## ModelArgs(dim=128, n_layers=2, n_heads=2, vocab_size=65, multiple_of=8, norm_eps=1e-06, max_batch_size=64, max_seq_len=256)
     # 'nanoLLaMA(n_layers=2, n_heads=2)-Jittor1.3.9.10-Nvidia.log',
